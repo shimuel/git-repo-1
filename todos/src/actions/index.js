@@ -2,13 +2,15 @@
 import fetch from 'cross-fetch'
 
 let nextTodoId = 0
-export const addTodo = (text, priority, comment) => ({
-  type: 'ADD_TODO',
-  id: nextTodoId++,
-  text,
-  priority: priority,
-  comment: comment
-})
+export const addTodo = (text, priority, comment) => {
+  return {
+    type: 'ADD_TODO',
+    id: nextTodoId++,
+    text,
+    priority: priority,
+    comment: comment
+  }
+}
 
 export const setVisibilityFilter = filter => ({
   type: 'SET_VISIBILITY_FILTER',

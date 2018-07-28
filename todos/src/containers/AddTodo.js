@@ -12,12 +12,14 @@ const AddTodo = ({ dispatch }) => {
         if (!input1.value.trim()) {
           return
         }
-        dispatch(addTodo(input1.value, pr1.selectedIndex, comm1.value.trim))
+
+        dispatch(addTodo(input1.value, pr1.selectedOptions[0].value, comm1.value.trim()))
         input1.value = ''
         comm1.value = ''
         pr1.selectedIndex = 0
       }}>
       <table>
+        <tbody>
         <tr>
             <td>
               <label>Name: </label>
@@ -46,7 +48,7 @@ const AddTodo = ({ dispatch }) => {
               <textarea ref={node => comm1 = node}  />
             </td>
         </tr>
-        <tbody id="todos"></tbody>
+        </tbody>
       </table>
       <button type="submit">
           Add Todo
