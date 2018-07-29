@@ -8,7 +8,8 @@ const todos = (state = [], action) => {
           text: action.text,
           priority: action.priority,
           comments: action.comment,
-          completed: false
+          completed: false,
+          inEdit: false
         }
       ]
     case 'TOGGLE_TODO':
@@ -17,6 +18,24 @@ const todos = (state = [], action) => {
           ? {...todo, completed: !todo.completed}
           : todo
       )
+    case 'EDIT_TODO':
+      return state.map((todo)=>todo.id === action.id ? {...todo,inEdit:!todo.inEdit}:todo)
+    case 'SAVE_TODO':
+      return state.map((todo)=>{
+        if(todo.id === action.todo.id) {
+          const modified = {
+            ...todo,
+            text:action.todo.text,
+            priority:action.todo.priority,
+            comments:action.todo.comments,
+            completed:action.todo.completed,
+            inEdit: false
+          }
+          return modified;
+        } else return todo;
+    })
+    case 'DELETE_TODO':
+      return state.filter((todo) => todo.id !== action.id)
     case 'RECEIVE_TODOS':
       return  [
         ...state,
@@ -26,7 +45,8 @@ const todos = (state = [], action) => {
             text: t.name,
             priority:t.priority,
             comments:t.comments,
-            completed: t.isComplete
+            completed: t.isComplete,
+            inEdit: false
           }
         })
       ]

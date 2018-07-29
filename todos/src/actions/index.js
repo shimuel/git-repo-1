@@ -12,6 +12,24 @@ export const addTodo = (text, priority, comment) => {
   }
 }
 
+export const EDIT_TODO = 'EDIT_TODO'
+export const editTodo = id => ({
+  type: EDIT_TODO,
+  id
+})
+
+export const SAVE_TODO = 'SAVE_TODO'
+export const updateTodo = todo => ({
+  type: SAVE_TODO,
+  todo
+})
+
+export const DELETE_TODO = 'DELETE_TODO'
+export const deleteTodo = id => ({
+  type: DELETE_TODO,
+  id
+})
+
 export const setVisibilityFilter = filter => ({
   type: 'SET_VISIBILITY_FILTER',
   filter

@@ -1,15 +1,23 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import Todo from './Todo'
+import EditTodo from './EditTodo'
 
 const TodoList = ({ todos, toggleTodo }) => (
   <ul>
     {todos.map(todo =>
-      <Todo
-        key={todo.id}
-        {...todo}
-        onClick={() => toggleTodo(todo.id)}
-      />
+      {
+      
+        if(!todo.inEdit){
+         return <Todo
+            key={todo.id}
+            {...todo}
+            onClick={(e) => { e.preventDefault(); toggleTodo(todo.id)}}
+          />
+        }else{
+          return <EditTodo key={todo.id} todo={todo}/>
+        }
+      }
     )}
   </ul>
 )
