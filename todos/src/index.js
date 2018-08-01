@@ -6,9 +6,10 @@ import React from 'react'
 import { render } from 'react-dom'
 import { createStore, applyMiddleware } from 'redux'
 import { Provider } from 'react-redux'
+import { BrowserRouter} from  'react-router-dom'
 import App from './components/App'
 import rootReducer from './reducers'
-import {serverFetchTodos} from './actions'
+import {todoAPI} from './services/todosService'
 
 
 const loggerMiddleware = createLogger()
@@ -19,12 +20,14 @@ const store = createStore(rootReducer,applyMiddleware(
 ));
 
 store
-  .dispatch(serverFetchTodos())
+  .dispatch(todoAPI.getAll())
   .then(() => console.log(store.getState()))
 
 render(
   <Provider store={store}>
-    <App />
+    <BrowserRouter>
+      <App /> 
+    </BrowserRouter>
   </Provider>,
   document.getElementById('root')
 )

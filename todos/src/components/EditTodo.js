@@ -142,10 +142,25 @@ class EditTodo  extends React.Component {
   } 
 
   function mapStateToProps(state) {
-    return {
-    // your mapStateToProps return object
-    };
+
+    let i = 0;
+    let id = undefined;
+    while( i < state.root.byId.length) {
+      let isEdit = state.root.todos[state.root.byId[i]]['inEdit'] === true 
+      if(isEdit)
+      {
+        id = state.root.byId[i];
+        break;
+      }
+      else
+        i++;
+    }
+    
+    return {todo: state.root.todos[id]};
   }
   
+  // const mapDispatchToProps = (dispatch, ownProps) => ({
+  //   onClick: () => dispatch(setVisibilityFilter(ownProps.filter))
+  // })
   export default connect(mapStateToProps)(EditTodo)
   //export default EditTodo

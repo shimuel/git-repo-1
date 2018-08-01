@@ -3,24 +3,27 @@ import PropTypes from 'prop-types'
 import Todo from './Todo'
 import EditTodo from './EditTodo'
 
-const TodoList = ({ todos, toggleTodo }) => (
-  <ul>
-    {todos.map(todo =>
+const TodoList = ({ todos, byId, toggleTodo }) => {
+  
+  return <ul>
+    {byId.map(id =>
       {
-      
-        if(!todo.inEdit){
-         return <Todo
-            key={todo.id}
-            {...todo}
-            onClick={(e) => { e.preventDefault(); toggleTodo(todo.id)}}
-          />
-        }else{
-          return <EditTodo key={todo.id} todo={todo}/>
+        if(todos[id]){
+          if(!todos[id].inEdit){
+            return <Todo
+                key={todos[id].id}
+                {...todos[id]}
+                onClick={(e) => { e.preventDefault(); toggleTodo(todos[id].id)}}
+              />
+          }else{
+            return <EditTodo key={todos[id].id} />
+          }
         }
       }
     )}
   </ul>
-)
+
+  }
 
 TodoList.propTypes = {
   todos: PropTypes.arrayOf(PropTypes.shape({
