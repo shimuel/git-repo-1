@@ -36,7 +36,7 @@ const filterTodos = (type, todos, byIds, handler) => {
 }
 
 const mapStateToProps = state => {
-  let todos = state.root.byId && state.root.byId.length > 0 ? state.root.todos : [];
+  let todos = state.root.byId && state.root.byId.length > 0 ? state.root.todos : {};
   let ids = !state.root.byId ? null : state.root.byId;
   return {todos:getVisibleTodos( todos, state.visibilityFilter,ids), byId:ids}
 }

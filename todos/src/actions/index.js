@@ -49,10 +49,13 @@ export const fetchTodos = () => ({
 })
 
 export const RECEIVE_TODOS = 'RECEIVE_TODOS'
-export const receivedTodos = (data) => ({
+export const receivedTodos = (data) => {
+  nextTodoId = data.length;
+  return {
   type: RECEIVE_TODOS,
   todos: data
-})
+  }
+}
 
 export const ERROR_RESPONSE = 'ERROR_RESPONSE'
 export const handleError = (data) => ({
