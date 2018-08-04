@@ -96,7 +96,8 @@ class EditTodo  extends React.Component {
     }
 
     render() { 
-      return( 
+      return(
+        <li>
         <div style={{display: 'table-row'}}> 
            <EditableInputCell cellData={{ 
               "type": "text", 
@@ -137,6 +138,7 @@ class EditTodo  extends React.Component {
               onClick={(e)=>{this.cancelChanges(e);}}/>
             </div>
         </div> 
+        </li>
       ) 
     }
   } 

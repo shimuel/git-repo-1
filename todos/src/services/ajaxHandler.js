@@ -43,18 +43,20 @@ function appService(endpoint) {
         .then(json => {
           // We can dispatch many times!
           // Here, we update the app state with the results of the API call.
-          const status = parseInt(json.status)
-          if(status !== 401)
-            dispatch(receivedTodos(/*subreddit,*/ json))
-          else{
-            let todos = [];
-            todos.push({"id":1,"text":"asd","priority":"high","comments":"asd","completed":false,"inEdit":false});
-            todos.push({"id":2,"text":"bcd","priority":"low","comments":"asd","completed":false,"inEdit":false});
-            todos.push({"id":3,"text":"dec","priority":"med","comments":"asd","completed":false,"inEdit":false});
-            dispatch(receivedTodos(/*subreddit,*/ todos))
-            //{"id":1,"text":"asd","priority":"high","comments":"asd","completed":false,"inEdit":false}
-            //dispatch(handleError(json.status))
-          }            
+          if(json){
+            const status = parseInt(json.status)
+            if(status !== 401)
+              dispatch(receivedTodos(/*subreddit,*/ json))
+            else{
+              let todos = [];
+              todos.push({"id":1,"text":"asd","priority":"high","comments":"asd","completed":false,"inEdit":false});
+              todos.push({"id":2,"text":"bcd","priority":"low","comments":"asd","completed":false,"inEdit":false});
+              todos.push({"id":3,"text":"dec","priority":"med","comments":"asd","completed":false,"inEdit":false});
+              dispatch(receivedTodos(/*subreddit,*/ todos))
+              //{"id":1,"text":"asd","priority":"high","comments":"asd","completed":false,"inEdit":false}
+              //dispatch(handleError(json.status))
+            } 
+          }         
         })
     }
   }

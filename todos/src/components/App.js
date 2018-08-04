@@ -3,9 +3,13 @@ import { Switch, Route,Link} from  'react-router-dom'
 import {Home, Roster, Schedule} from './main'
 import Login from './auth/Login'
 const App = () => (
-  <div>
-    <Header />
-    <Main />
+  <div style={{display: 'table-row', height:'100%', width:'100%', border:'1px solid blue'}}>
+    <div style={{display: 'table-cell', width: '300px', padding: '3px', borderRight:'solid 3px red'}}>
+      <Header />
+    </div>
+    <div style={{display: 'table-cell',width: '100%', padding: '3px'}}>
+      <Main />
+    </div>
   </div>
 )
 
