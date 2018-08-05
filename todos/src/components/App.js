@@ -1,6 +1,7 @@
 import React from 'react'
 import { Switch, Route,Link} from  'react-router-dom'
-import {Home, Roster, Schedule} from './main'
+import {Roster, Schedule} from './main'
+import Home  from './Home'
 import Login from './auth/Login'
 const App = () => (
   <div style={{display: 'table-row', height:'100%', width:'100%', border:'1px solid blue'}}>

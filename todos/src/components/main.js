@@ -1,11 +1,7 @@
 
 import React from 'react'
 import { Switch, Route,Link} from  'react-router-dom'
-  
 
-import Footer from './Footer'
-import AddTodo from '../containers/AddTodo'
-import VisibleTodoList from '../containers/VisibleTodoList'
 import {PlayerAPI} from '../services/playersService'
 
   // The FullRoster iterates over all of the players and creates
@@ -62,10 +58,3 @@ const Player = (props) => {
     </div>
   )
   
-  export const Home = () => (
-    <div>
-        <AddTodo />
-        <VisibleTodoList />
-        <Footer />
-    </div>
-  )
