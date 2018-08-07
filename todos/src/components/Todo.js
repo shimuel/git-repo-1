@@ -16,7 +16,7 @@ class Todo  extends React.Component {
         textDecoration: this.props.completed ? 'line-through' : 'none'
       }}>
       <div style={{display: 'table-row'}}>
-        <div style={{display: 'table-cell', padding: '3px'}}>{this.props.text}</div>
+        <div style={{display: 'table-cell', padding: '3px'}}>{this.props.name}</div>
         <div style={{display: 'table-cell', padding: '3px', fontWeight: 'bold'}}>{this.props.priority}</div>
         <div style={{display: 'table-cell', padding: '3px'}}>{this.props.comments}</div>
         <div style={{display: 'table-cell', padding: '3px'}}>

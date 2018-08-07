@@ -100,7 +100,7 @@ class EditTodo  extends React.Component {
         <li>
         <div style={{display: 'table-row'}}> 
            <EditableInputCell cellData={{ 
-              "type": "text", 
+              "type": "name", 
               todo: this.props.todo, 
               id: this.props.todo.id,
               update: this.updateChanges

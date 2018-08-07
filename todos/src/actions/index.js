@@ -4,7 +4,8 @@ export const addTodo = (text, priority, comment) => {
   return {
     type: 'ADD_TODO',
     id: ++nextTodoId,
-    text,
+    name:text,
+    isComplete:false,
     priority: priority,
     comment: comment
   }

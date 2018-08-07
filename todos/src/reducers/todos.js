@@ -8,10 +8,10 @@ const root = (state = { byId: [],todos: {} }, action) => {
         ...state.todos,
         [action.id]: {
           id: action.id,
-          text: action.text,
+          name: action.name,
           priority: action.priority,
           comments: action.comment,
-          completed: false,
+          isComplete: false,
           inEdit: false
         }
       }
