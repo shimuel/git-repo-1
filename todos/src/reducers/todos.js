@@ -1,9 +1,8 @@
-const root = (state = { isAuthenticated:false, byId: [],todos: {} }, action) => {
+const root = (state = { byId: [],todos: {} }, action) => {
 
   switch (action.type) {
     case 'ADD_TODO':
     return {
-      isAuthenticated: state.isAuthenticated,
       byId: [ ...state.byId, action.id],
       todos: {
         ...state.todos,
@@ -22,7 +21,6 @@ const root = (state = { isAuthenticated:false, byId: [],todos: {} }, action) => 
       const isCompleted = !state.todos[action.id].isCompleted;
       let toggletodo = {...state.todos[action.id], completed:isCompleted}
       return {
-        isAuthenticated: state.isAuthenticated,
         byId: [ ...state.byId],
         todos: {
           ...state.todos,
@@ -34,7 +32,6 @@ const root = (state = { isAuthenticated:false, byId: [],todos: {} }, action) => 
       const isEdit = !state.todos[action.id].inEdit;
       let edittodo = {...state.todos[action.id], inEdit:isEdit}
       return {
-        isAuthenticated: state.isAuthenticated,
         byId: [ ...state.byId],
         todos: {
           ...state.todos,
@@ -45,7 +42,6 @@ const root = (state = { isAuthenticated:false, byId: [],todos: {} }, action) => 
     case 'SAVE_TODO':
       action.todo.inEdit = false;
       return {
-        isAuthenticated: state.isAuthenticated,
         byId: [ ...state.byId],
         todos: {
           ...state.todos,
@@ -59,7 +55,6 @@ const root = (state = { isAuthenticated:false, byId: [],todos: {} }, action) => 
     delete state.todos[action.id] // delete the hash associated with the action.id
     
     return {
-      isAuthenticated: state.isAuthenticated,
       byId: prunedIds,
       todos: state.todos
     }

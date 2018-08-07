@@ -1,35 +1,47 @@
 import React, { Component } from 'react';
 import './login.css';
-
+import { connect } from "react-redux";
+import AuthService from '../../services/authService'
+import {setAuthentication, handleError} from '../../actions/index'
 class Login extends Component {
     constructor(){
+        
         super();
-        this.handleChange = this.handleChange.bind(this);
+
+        this.usr = null;
+        this.pwd = null;
+
+        this.click = this.handleClick.bind(this);
+       
+    }
+    componentWillMount() {
+        if (this.props.isAuthorized) {
+            this.props.history.replace('/')
+        }
     }
     render() {
         return (
             <div className="center">
                 <div className="card">
-                    <h1>Login</h1>
+                    {/* <h1>Login</h1> */}
                     <form>
-                        <input
+                        <input ref={node => this.usr = node}
                             className="form-item"
                             placeholder="Username goes here..."
                             name="username"
                             type="text"
-                            onChange={this.handleChange}
                         />
-                        <input
+                        <input ref={node => this.pwd = node}
                             className="form-item"
                             placeholder="Password goes here..."
                             name="password"
                             type="password"
-                            onChange={this.handleChange}
                         />
                         <input
                             className="form-submit"
-                            value="SUBMIT"
-                            type="submit"
+                            value="Sign in"
+                            type="button"
+                            onClick={this.click}
                         />
                     </form>
                 </div>
@@ -37,13 +49,17 @@ class Login extends Component {
         );
     }
 
-    handleChange(e){
-        this.setState(
-            {
-                [e.target.name]: e.target.value
-            }
-        )
+    handleClick(e){
+        e.preventDefault();
+        const svc =  new AuthService();
+        svc.signIn(this.usr.value, this.pwd.value, this.props.dispatch).then(res => {
+            this.props.dispatch(setAuthentication(res));
+            this.props.history.replace('/');
+        });
     }
 }
 
-export default Login;
+function mapStateToProps(state) {
+    return { authenticated: state.isAuthorized};
+  }
+export default connect(mapStateToProps)(Login)

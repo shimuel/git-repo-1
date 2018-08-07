@@ -1,31 +1,38 @@
 import React, { Component } from 'react';
-import WithAuth from './auth/AuthWrapper'
+import { connect } from 'react-redux'
+import AuthGuard from './auth/AuthWrapper'
 import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
-//import './Login.css';
+import Logout from './auth/Logout'
+//import {todoAPI} from '../services/todosService'
 
 class Home extends Component {
-    constructor(){
-        super();
-        this.login = this.login.bind(this);
+    constructor(props){
+        super(props);
     }
+
+      
+    componentDidMount() {
+        //this.props.dispatch(todoAPI.getAll())
+      }
+
     render() {
         return (
           <div>
             <AddTodo />
             <VisibleTodoList />
             <Footer />
+            <Logout/>
           </div>
         )
     }
-
-    login(e){
-        // this.setState(
-        //     {
-        //         [e.target.name]: e.target.value
-        //     }
-        // )
-    }
 }
-export default WithAuth(Home);
+
+export default connect(state => {
+    return  {}
+},
+dispatch => {
+    return {}
+})(AuthGuard(Home))
+//export default AuthGuard(Home);

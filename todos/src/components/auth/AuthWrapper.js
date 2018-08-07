@@ -3,35 +3,23 @@ import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
 //import * as actions from "../actions";
 
-const WithAuth = securedComponent => {
-  class featureDecorated extends React.Component {
+const AuthGuard = AuthComponent => {
+  class authCheckDecorator extends React.Component {
 
     componentWillMount() {
-        if (!this.props.isAuthenticated) {
+        if (!this.props.isAuthorized) {
             this.props.history.replace('/login')
         }
-        // else {
-        //     try {
-        //         const profile = Auth.getProfile()
-        //         this.setState({
-        //             user: profile
-        //         })
-        //     }
-        //     catch(err){
-        //         //Auth.logout()
-        //         this.props.history.replace('/login')
-        //     }
-        // }
     }
 
     render() {
-        const { isAuthenticated, /*authActions,*/ ...rest } = this.props;
-        if (isAuthenticated) {
+        const { isAuthorized, /*authActions,*/ ...rest } = this.props;
+        if (isAuthorized) {
             return (
                 //     <feature auth={{ state: authState, actions: authActions }}
                 //     {...rest}
                 //   />
-                <securedComponent/>
+                <AuthComponent/>
             )
         }
         else {
@@ -42,13 +30,13 @@ const WithAuth = securedComponent => {
 
   return connect(
     state => {
-        return  {isAuthenticated: state.root.isAuthenticated}
+        return  {isAuthorized: state.isAuthorized}
     },
     dispatch => {
         //return  {authActions: bindActionCreators(actions, dispatch)}
         return {}
     }
-  )(featureDecorated);
+  )(authCheckDecorator);
 };
 
-export default WithAuth;
+export default AuthGuard;

@@ -15,7 +15,7 @@ import {todoAPI} from './services/todosService'
 const loggerMiddleware = createLogger()
 
 const store = createStore(rootReducer,applyMiddleware(
-  thunkMiddleware, // lets us dispatch() functions
+  thunkMiddleware, // lets use of dispatch() functions
   loggerMiddleware // neat middleware that logs actions
 ));
 

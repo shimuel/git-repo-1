@@ -3,35 +3,42 @@ import PropTypes from 'prop-types'
 import Todo from './Todo'
 import EditTodo from './EditTodo'
 
-const TodoList = ({ todos, byId, toggleTodo }) => {
-  
-  return <ul>
-    {byId.map(id =>
-      {
-        if(todos[id]){
-          if(!todos[id].inEdit){
-            return <Todo
-                key={todos[id].id}
-                {...todos[id]}
-                onClick={(e) => { e.preventDefault(); toggleTodo(todos[id].id)}}
-              />
-          }else{
-            return <EditTodo key={todos[id].id} />
-          }
-        }
-      }
-    )}
-  </ul>
+//const TodoList = ({ todos, byId, toggleTodo }) => {
+class TodoList extends React.Component {
+    constructor(props) {
+     
+      super(props);
+    }  
 
-  }
+    render(){
+      return <ul>
+        {this.props.byId.map(id =>
+          {
+            if(this.props.todos[id]){
+              if(!this.props.todos[id].inEdit){
+                return <Todo
+                    key={this.props.todos[id].id}
+                    {...this.props.todos[id]}
+                    onClick={(e) => { e.preventDefault(); this.props.toggleTodo(this.props.todos[id].id)}}
+                  />
+              }else{
+                return <EditTodo key={this.props.todos[id].id} />
+              }
+            }
+          }
+        )}
+      </ul>
+    }
+}
 
 TodoList.propTypes = {
   todos: PropTypes.objectOf(PropTypes.shape({
     id: PropTypes.number.isRequired,
-    completed: PropTypes.bool.isRequired,
-    text: PropTypes.string.isRequired,
+    isComplete: PropTypes.bool.isRequired,
+    name: PropTypes.string.isRequired,
     priority: PropTypes.string.isRequired,
-    inEdit: PropTypes.bool.isRequired,
+    comments: PropTypes.string.isRequired
+    // inEdit: PropTypes.bool.isRequired,
   }).isRequired).isRequired,
   byId:PropTypes.arrayOf(Number).isRequired,
   toggleTodo: PropTypes.func.isRequired

@@ -1,8 +1,12 @@
 import appService from './ajaxHandler'
-export const todoAPI = {
+import AuthService from './authService'
+import {fetchTodos, receivedTodos, handleError} from '../actions/index'
 
+export const todoAPI = {
+    
     getAll(){
-        return appService('api/todo');
+        const auth = new AuthService();
+        return appService('api/todo', auth.getToken() ,fetchTodos, receivedTodos, handleError);
     }
     
 }

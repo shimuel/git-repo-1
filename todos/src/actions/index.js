@@ -52,13 +52,29 @@ export const RECEIVE_TODOS = 'RECEIVE_TODOS'
 export const receivedTodos = (data) => {
   nextTodoId = data.length;
   return {
-  type: RECEIVE_TODOS,
-  todos: data
+    type: RECEIVE_TODOS,
+    todos: data
   }
 }
 
+export const setAuthentication = user => {
+ const flag = user && user.token ? AuthenticationFlags.AUTHENTICATED : AuthenticationFlags.NOT_AUTHENTICATED
+  const obj = {
+    type: 'SET_AUTHENTICATON',
+    flag:flag
+  }
+  return obj;
+}
+
+export const AuthenticationFlags = {
+  AUTHENTICATED: true,
+  NOT_AUTHENTICATED: false
+}
+
 export const ERROR_RESPONSE = 'ERROR_RESPONSE'
-export const handleError = (data) => ({
+export const handleError = (data) => {
+  return{
   type:ERROR_RESPONSE,
   code:  data
-})
+  }
+}
