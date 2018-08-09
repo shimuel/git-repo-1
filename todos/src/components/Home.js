@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux'
+//import { bindActionCreators } from "redux";
 import AuthGuard from './auth/AuthWrapper'
 import Footer from './Footer'
 import AddTodo from '../containers/AddTodo'
 import VisibleTodoList from '../containers/VisibleTodoList'
 import Logout from './auth/Logout'
-//import {todoAPI} from '../services/todosService'
+import {resetTodos}  from "../actions";
 
 class Home extends Component {
     constructor(props){
@@ -14,7 +15,7 @@ class Home extends Component {
 
       
     componentDidMount() {
-        //this.props.dispatch(todoAPI.getAll())
+        this.props.dispatch(this.props.resetTodos())
       }
 
     render() {
@@ -29,10 +30,14 @@ class Home extends Component {
     }
 }
 
-export default connect(state => {
+export default connect(
+state => {
     return  {}
 },
 dispatch => {
-    return {}
+    return {
+        dispatch,
+        resetTodos
+      }
 })(AuthGuard(Home))
 //export default AuthGuard(Home);

@@ -72,6 +72,8 @@ const root = (state = { byId: [],todos: {} }, action) => {
       
       return objState;
 
+    case 'RESET_TODOS': 
+      return { byId: [],todos: {} };
     case 'ERROR_RESPONSE':
     default:
       return state

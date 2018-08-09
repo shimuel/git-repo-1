@@ -19,9 +19,9 @@ const store = createStore(rootReducer,applyMiddleware(
   loggerMiddleware // neat middleware that logs actions
 ));
 
-store
-  .dispatch(todoAPI.getAll())
-  .then(() => console.log(store.getState()))
+// store
+//   .dispatch(todoAPI.getAll())
+//   .then(() => console.log(store.getState()))
 
 render(
   <Provider store={store}>

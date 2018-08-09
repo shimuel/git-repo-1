@@ -1,7 +1,6 @@
 import React from "react";
-import { bindActionCreators } from "redux";
 import { connect } from "react-redux";
-//import * as actions from "../actions";
+import {todoAPI} from '../../services/todosService'
 
 const AuthGuard = AuthComponent => {
   class authCheckDecorator extends React.Component {
@@ -12,6 +11,12 @@ const AuthGuard = AuthComponent => {
         }
     }
 
+    componentDidMount() {
+        if (this.props.isAuthorized) {
+            todoAPI.getAll()(this.props.dispatch)
+        }
+    }
+
     render() {
         const { isAuthorized, /*authActions,*/ ...rest } = this.props;
         if (isAuthorized) {
@@ -19,7 +24,7 @@ const AuthGuard = AuthComponent => {
                 //     <feature auth={{ state: authState, actions: authActions }}
                 //     {...rest}
                 //   />
-                <AuthComponent/>
+                <AuthComponent {...rest}/>
             )
         }
         else {
@@ -29,14 +34,31 @@ const AuthGuard = AuthComponent => {
   }
 
   return connect(
-    state => {
-        return  {isAuthorized: state.isAuthorized}
-    },
-    dispatch => {
-        //return  {authActions: bindActionCreators(actions, dispatch)}
-        return {}
-    }
+    (state) => {
+        return {
+          isAuthorized:state.isAuthorized
+        }
+      }, function (dispatch, props) {
+        return {
+          dispatch
+        }
+      }
   )(authCheckDecorator);
 };
 
 export default AuthGuard;
+
+
+// return connect(
+//     (state) => {
+//         return {
+//           isAuthorized:state.isAuthorized
+//         }
+//       }, function (dispatch, props) {
+//         return {
+//           dispatch,
+//           ...bindActionCreators({
+//           ...actions
+//         }, dispatch)
+//         }
+//       })

@@ -23,6 +23,11 @@ export const updateTodo = todo => ({
   todo
 })
 
+export const RESET_TODOS = 'RESET_TODOS'
+export const resetTodos = () => ({
+  type: RESET_TODOS
+})
+
 export const DELETE_TODO = 'DELETE_TODO'
 export const deleteTodo = id => ({
   type: DELETE_TODO,

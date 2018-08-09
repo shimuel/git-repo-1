@@ -24,12 +24,14 @@ class Logout extends React.Component {
 
   render() {
     return (
-      <div>
-        <form onSubmit={this.signOut}>
-          <button type="submit">
-            Logout 
-          </button>
-        </form>
+      <div style={{display: 'table-row'}}> 
+        <div style={{display: 'table-cell', padding: '3px'}}> 
+          <form onSubmit={this.signOut}>
+            <button type="submit">
+              Logout 
+            </button>
+          </form>
+        </div>
       </div>
     )
   }
