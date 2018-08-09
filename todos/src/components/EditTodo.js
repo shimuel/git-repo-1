@@ -1,7 +1,8 @@
 import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
-import { updateTodo,editTodo, deleteTodo } from '../actions'
+import { editTodo, deleteTodo } from '../actions'
+import {todoAPI} from '../services/todosService'
 
 export class EditableInputCell extends React.Component { 
  
@@ -84,7 +85,8 @@ class EditTodo  extends React.Component {
       }else{
         const modifiedTodo = Object.assign({},this.props.todo, this.changes);
         console.log('updateChanges...'+JSON.stringify(modifiedTodo));
-        this.props.dispatch(updateTodo(modifiedTodo));
+        //this.props.dispatch(updateTodo(modifiedTodo));
+        todoAPI.updateTodo(modifiedTodo, this.props.dispatch);
       }
     }
 

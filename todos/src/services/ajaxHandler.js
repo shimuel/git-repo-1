@@ -1,8 +1,9 @@
 import fetch from 'cross-fetch';
 
 function appService(
-  requestEndpoint, token, 
-  preAction, postAction, errCallback, pload) {
+    requestEndpoint, token, 
+    preAction, postAction, 
+    errCallback, pload) {
     // Thunk middleware knows how to handle functions.
     // It passes the dispatch method as an argument to the function,
     // thus making it able to dispatch actions itself.
@@ -54,16 +55,16 @@ function appService(
                 var error = new Error(response.statusText)
                 error.response = response
                 dispatchError(error);
-              }else
-                return response.json();
+              }else{
+                if(response.status !== 204)/*NO CONTENT RETURN */
+                  return response.json();
+              }
           },error => {dispatchError(error);})
-          // .then(response => {
-          //   if(response)
-          //     return response.json()
-          // })
           .then(response => {
             if(response){
-              dispatch(postAction( response))
+              if(postAction)
+                dispatch(postAction( response))
+
               return Promise.resolve(response);
             }
           });

@@ -2,24 +2,28 @@ const root = (state = { byId: [],todos: {} }, action) => {
 
   switch (action.type) {
     case 'ADD_TODO':
-    return {
-      byId: [ ...state.byId, action.id],
-      todos: {
-        ...state.todos,
-        [action.id]: {
-          id: action.id,
-          name: action.name,
-          priority: action.priority,
-          comments: action.comment,
-          isComplete: false,
-          inEdit: false
+      return {
+        byId: [ ...state.byId, action.id],
+        todos: {
+          ...state.todos,
+          [action.id]: {
+            id: action.id,
+            name: action.name,
+            priority: action.priority,
+            comments: action.comment,
+            isComplete: false,
+            inEdit: false
+          }
         }
       }
-    }
-
+    // case 'GET_TODO':
+    //   let todo = {...state.todos[action.id]}
+    //   return {
+    //     todo
+    //   }
     case 'TOGGLE_TODO':
-      const isCompleted = !state.todos[action.id].isCompleted;
-      let toggletodo = {...state.todos[action.id], completed:isCompleted}
+      const isComplete = !state.todos[action.id].isComplete;
+      let toggletodo = {...state.todos[action.id], isComplete}
       return {
         byId: [ ...state.byId],
         todos: {

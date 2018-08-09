@@ -2,6 +2,7 @@ import { connect } from 'react-redux'
 import { toggleTodo } from '../actions'
 import TodoList from '../components/TodoList'
 import { VisibilityFilters } from '../actions'
+import {todoAPI} from '../services/todosService'
 
 const getVisibleTodos = (todos, filter, ids) => {
   switch (filter) {
@@ -9,12 +10,12 @@ const getVisibleTodos = (todos, filter, ids) => {
       return todos
     case VisibilityFilters.SHOW_COMPLETED:
       return filterTodos(filter,todos,ids, (todo) => {
-        const rtn = todo['completed'] === true
+        const rtn = todo['isComplete'] === true
         return rtn;
       })//todos.filter(t => t.completed)
     case VisibilityFilters.SHOW_ACTIVE:
       return filterTodos(filter,todos,ids, (todo) => {
-        const rtn = todo['completed'] !== true
+        const rtn = todo['isComplete'] !== true
         return rtn;
       })//todos.filter(t => !t.completed)
     default:

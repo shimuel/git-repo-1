@@ -45,7 +45,9 @@ namespace TodoApi.Controllers
 
             todo.IsComplete = item.IsComplete;
             todo.Name = item.Name;
-
+            todo.Priority = item.Priority;
+            todo.Comments = item.Comments;
+            todo.IsComplete = item.IsComplete;
             _context.TodoItems.Update(todo);
             _context.SaveChanges();
             return NoContent();

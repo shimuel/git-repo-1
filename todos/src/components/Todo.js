@@ -13,7 +13,7 @@ class Todo  extends React.Component {
     return <li
       onClick={this.props.onClick}
       style={{
-        textDecoration: this.props.completed ? 'line-through' : 'none'
+        textDecoration: this.props.isComplete ? 'line-through' : 'none'
       }}>
       <div style={{display: 'table-row'}}>
         <div style={{display: 'table-cell', padding: '3px'}}>{this.props.name}</div>
