@@ -1,13 +1,14 @@
 
 let nextTodoId = 0
-export const addTodo = (text, priority, comment) => {
+export const addTodo = (/*text, priority, comment*/todo) => {
   return {
     type: 'ADD_TODO',
-    id: ++nextTodoId,
-    name:text,
+    //id: ++nextTodoId,
+    id: todo.id,
+    name:todo.name,
     isComplete:false,
-    priority: priority,
-    comment: comment
+    priority: todo.priority,
+    comments: todo.comments 
   }
 }
 

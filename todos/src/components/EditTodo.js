@@ -54,9 +54,9 @@ export class EditableInputCell extends React.Component {
           defaultValue={this.props.cellData.todo[this.props.cellData.type]}
           ref={(node) => this.inputObj = node} 
           onChange={(e)=>this.handleEdit(e)}> 
-                    <option value="Low">low</option> 
-                    <option value="Med">med</option> 
-                    <option value="High">high</option> 
+                    <option value="Low">Low</option> 
+                    <option value="Med">Med</option> 
+                    <option value="High">High</option> 
           </select> 
         </div> 
       ); 
@@ -81,7 +81,8 @@ class EditTodo  extends React.Component {
     saveChanges = (e, isDelete) => {
 
       if(isDelete){
-        this.props.dispatch(deleteTodo(this.props.todo.id));
+        todoAPI.deleteTodo(this.props.todo.id, this.props.dispatch);
+        //this.props.dispatch(deleteTodo(this.props.todo.id));
       }else{
         const modifiedTodo = Object.assign({},this.props.todo, this.changes);
         console.log('updateChanges...'+JSON.stringify(modifiedTodo));

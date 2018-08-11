@@ -61,11 +61,9 @@ function appService(
               }
           },error => {dispatchError(error);})
           .then(response => {
-            if(response){
-              if(postAction)
+            if(postAction){
                 dispatch(postAction( response))
-
-              return Promise.resolve(response);
+                return Promise.resolve(response);
             }
           });
     }

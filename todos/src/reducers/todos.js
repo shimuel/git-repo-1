@@ -10,7 +10,7 @@ const root = (state = { byId: [],todos: {} }, action) => {
             id: action.id,
             name: action.name,
             priority: action.priority,
-            comments: action.comment,
+            comments: action.comments,
             isComplete: false,
             inEdit: false
           }
@@ -72,6 +72,7 @@ const root = (state = { byId: [],todos: {} }, action) => {
       action.todos.forEach(element => {
         objState.byId.push(element.id);
         objState.todos[element.id] = element
+        objState.todos[element.id].comments = element.comments === null ? '' : element.comments
       });
       
       return objState;

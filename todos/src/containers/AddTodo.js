@@ -1,6 +1,7 @@
 import React from 'react'
 import { connect } from 'react-redux'
 import { addTodo } from '../actions'
+import {todoAPI} from '../services/todosService'
 
 const AddTodo = ({ dispatch }) => {
   let input1, pr1, comm1
@@ -12,8 +13,16 @@ const AddTodo = ({ dispatch }) => {
         if (!input1.value.trim()) {
           return
         }
+        let todo = {
+          name:input1.value,
+          isComplete:false,
+          priority: pr1.selectedOptions[0].value,
+          comments: comm1.value.trim()
+        }
+        
+        todoAPI.addTodo(todo, dispatch);
 
-        dispatch(addTodo(input1.value, pr1.selectedOptions[0].value, comm1.value.trim()))
+        //dispatch(addTodo(input1.value, pr1.selectedOptions[0].value, comm1.value.trim()))
         input1.value = ''
         comm1.value = ''
         pr1.selectedIndex = 0
@@ -34,9 +43,9 @@ const AddTodo = ({ dispatch }) => {
             </td>
             <td>
               <select ref={node => pr1 = node}>
-                  <option value="low">low</option>
-                  <option value="med">med</option>
-                  <option value="high">high</option>
+                  <option value="Low">Low</option>
+                  <option value="Med">Med</option>
+                  <option value="High">High</option>
               </select>
             </td>
         </tr>
