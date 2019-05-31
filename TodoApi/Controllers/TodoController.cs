@@ -69,7 +69,7 @@ namespace TodoApi.Controllers
         [HttpGet]
         public ActionResult<List<TodoItem>> GetAll()
         {
-            return _context.TodoItems.ToList();return _context.TodoItems.ToList();
+            return _context.TodoItems.ToList();
         }
 
         [HttpGet("{id}", Name = "GetTodo")]

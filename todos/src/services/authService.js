@@ -28,8 +28,8 @@ export default class AuthService {
             body: JSON.stringify({
                 "firstName":"test",
                 "lastName":"test",
-                "username":"test",
-                "password":"test"
+                "username":username,
+                "password":password
             })
         }
 
@@ -49,13 +49,22 @@ export default class AuthService {
             } else {
                 var error = new Error(response.statusText)
                 error.response = response
-                throw error
+                return error
             }
         })
-        .then(response => response.json())
+        .then(response => {
+            if(! (response instanceof Error)){
+                //alert('1')
+                return response.json();
+            }
+        })
         .then(res => {
+            if(res){
             this.signInSuccess(res) // Setting the token in localStorage
             return Promise.resolve(res);
+            }else{
+                return Promise.reject();
+            }
         })
 
         //return appService('users/authenticate', null , null,setAuthentication,  handleError, pload, true)(dispatch);
